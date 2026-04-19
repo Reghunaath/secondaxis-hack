@@ -5,31 +5,26 @@ import os
 from datetime import datetime
 from pathlib import Path
 import requests as http
+from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request
+
+load_dotenv()
 
 app = Flask(__name__)
 CSV_FILE = Path("listings.csv")
-FEEDBACK_FILE = Path("feedback.json")
 
 JSONBIN_KEY = os.environ.get("JSONBIN_KEY")
 JSONBIN_ID  = os.environ.get("JSONBIN_ID")
-_JSONBIN_HEADERS = lambda: {"X-Master-Key": JSONBIN_KEY, "Content-Type": "application/json"}
+_HEADERS = lambda: {"X-Master-Key": JSONBIN_KEY, "Content-Type": "application/json"}
 
 
 def _fb_read():
-    if JSONBIN_KEY and JSONBIN_ID:
-        r = http.get(f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest", headers=_JSONBIN_HEADERS())
-        return r.json().get("record", [])
-    if FEEDBACK_FILE.exists():
-        return json.loads(FEEDBACK_FILE.read_text(encoding="utf-8"))
-    return []
+    r = http.get(f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest", headers=_HEADERS())
+    return r.json().get("record", [])
 
 
 def _fb_write(entries):
-    if JSONBIN_KEY and JSONBIN_ID:
-        http.put(f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}", headers=_JSONBIN_HEADERS(), json=entries)
-    else:
-        FEEDBACK_FILE.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+    http.put(f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}", headers=_HEADERS(), json=entries)
 
 
 def load_listings():
