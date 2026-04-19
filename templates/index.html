@@ -303,6 +303,49 @@
     </main>
 </div>
 
+<!-- FEEDBACK SECTION -->
+<section id="feedbackSection" style="background:#F9FAFB;border-top:1px solid #E5E7EB;padding:60px 24px;">
+    <div style="max-width:760px;margin:0 auto;">
+        <h2 style="font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;color:#111827;margin-bottom:4px;">Community Feedback</h2>
+        <p style="font-size:13px;color:#6B7280;margin-bottom:28px;">HuskyHousing is in early development — share what you think, what's missing, or what could be better.</p>
+
+        <!-- Submit form -->
+        <div style="background:#fff;border:1px solid #E5E7EB;border-radius:12px;padding:24px;margin-bottom:32px;">
+            <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                    <div>
+                        <label style="display:block;font-size:12px;font-weight:500;color:#4B5563;margin-bottom:4px;">Name <span style="color:#9CA3AF;">(optional)</span></label>
+                        <input id="fbName" type="text" placeholder="Your name" style="width:100%;padding:9px 12px;border:1px solid #E5E7EB;border-radius:6px;font-size:13px;font-family:inherit;outline:none;background:#F9FAFB;">
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:12px;font-weight:500;color:#4B5563;margin-bottom:4px;">Type</label>
+                        <select id="fbType" style="width:100%;padding:9px 12px;border:1px solid #E5E7EB;border-radius:6px;font-size:13px;font-family:inherit;outline:none;background:#F9FAFB;">
+                            <option value="general">General</option>
+                            <option value="bug">Bug report</option>
+                            <option value="feature">Feature request</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom:14px;">
+                    <label style="display:block;font-size:12px;font-weight:500;color:#4B5563;margin-bottom:4px;">Feedback <span style="color:#D41B2C;">*</span></label>
+                    <textarea id="fbMessage" required placeholder="What do you think? What's missing or broken?" style="width:100%;padding:9px 12px;border:1px solid #E5E7EB;border-radius:6px;font-size:13px;font-family:inherit;outline:none;background:#F9FAFB;min-height:90px;resize:vertical;"></textarea>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <button type="submit" id="fbSubmitBtn" class="btn btn-primary" style="padding:10px 24px;">
+                        <i class="ph ph-paper-plane-tilt"></i> Submit
+                    </button>
+                    <span id="fbStatus" style="font-size:13px;color:#16A34A;display:none;">Thanks for your feedback!</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Feedback list -->
+        <div id="feedbackList" style="display:flex;flex-direction:column;gap:12px;">
+            <div style="font-size:13px;color:#9CA3AF;text-align:center;padding:20px 0;">Loading feedback…</div>
+        </div>
+    </div>
+</section>
+
 <!-- DETAIL MODAL -->
 <div class="modal-overlay" id="detailModal">
     <div class="modal">
@@ -658,9 +701,63 @@ document.getElementById('detailModal').addEventListener('click', e => { if (e.ta
 document.getElementById('postModal').addEventListener('click',   e => { if (e.target === document.getElementById('postModal'))   closePostModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDetailModal(); closePostModal(); } });
 
+// ── Feedback ─────────────────────────────────────────────────────────────────
+const FB_TYPE_LABELS = { general: 'General', bug: 'Bug Report', feature: 'Feature Request' };
+const FB_TYPE_COLORS = { general: '#2563EB', bug: '#D41B2C', feature: '#16A34A' };
+
+async function loadFeedback() {
+    const res = await fetch('/api/feedback');
+    const data = await res.json();
+    const list = document.getElementById('feedbackList');
+    if (!data.length) {
+        list.innerHTML = '<div style="font-size:13px;color:#9CA3AF;text-align:center;padding:20px 0;">No feedback yet — be the first!</div>';
+        return;
+    }
+    list.innerHTML = data.map(f => {
+        const color = FB_TYPE_COLORS[f.type] || '#6B7280';
+        const label = FB_TYPE_LABELS[f.type] || f.type;
+        const initials = (f.name || 'A').slice(0,2).toUpperCase();
+        return `<div style="background:#fff;border:1px solid #E5E7EB;border-radius:10px;padding:16px 20px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                <div style="width:34px;height:34px;border-radius:50%;background:${color}1A;color:${color};font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${escHtml(initials)}</div>
+                <div style="flex:1;min-width:0;">
+                    <div style="font-weight:600;font-size:13px;color:#111827;">${escHtml(f.name || 'Anonymous')}</div>
+                    <div style="font-size:11px;color:#9CA3AF;">${escHtml(f.date)}</div>
+                </div>
+                <span style="font-size:11px;font-weight:500;color:${color};background:${color}1A;padding:3px 8px;border-radius:20px;">${escHtml(label)}</span>
+            </div>
+            <p style="font-size:13px;color:#374151;line-height:1.6;margin:0;">${escHtml(f.message)}</p>
+        </div>`;
+    }).join('');
+}
+
+async function submitFeedback(e) {
+    e.preventDefault();
+    const btn = document.getElementById('fbSubmitBtn');
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+    const payload = {
+        name: document.getElementById('fbName').value.trim(),
+        type: document.getElementById('fbType').value,
+        message: document.getElementById('fbMessage').value.trim(),
+    };
+    await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
+    document.getElementById('fbStatus').style.display = 'inline';
+    document.getElementById('feedbackForm').reset();
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    setTimeout(() => document.getElementById('fbStatus').style.display = 'none', 4000);
+    loadFeedback();
+}
+
 // Init
 updateRangeTrack();
 doFilter();
+loadFeedback();
 </script>
 </body>
 </html>

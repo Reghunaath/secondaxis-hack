@@ -1,10 +1,13 @@
 import csv
+import json
 import math
+from datetime import datetime
 from pathlib import Path
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 CSV_FILE = Path("listings.csv")
+FEEDBACK_FILE = Path("feedback.json")
 
 
 def load_listings():
@@ -182,6 +185,30 @@ def api_listings():
         "type_counts": type_counts,
         "neighborhoods": neighborhoods,
     })
+
+
+@app.route("/api/feedback", methods=["GET"])
+def get_feedback():
+    if not FEEDBACK_FILE.exists():
+        return jsonify([])
+    return jsonify(json.loads(FEEDBACK_FILE.read_text(encoding="utf-8")))
+
+
+@app.route("/api/feedback", methods=["POST"])
+def post_feedback():
+    data = request.get_json(force=True)
+    message = (data.get("message") or "").strip()
+    if not message:
+        return jsonify({"error": "message required"}), 400
+    entries = json.loads(FEEDBACK_FILE.read_text(encoding="utf-8")) if FEEDBACK_FILE.exists() else []
+    entries.insert(0, {
+        "name": (data.get("name") or "Anonymous").strip() or "Anonymous",
+        "type": data.get("type") or "general",
+        "message": message,
+        "date": datetime.now().strftime("%b %d, %Y"),
+    })
+    FEEDBACK_FILE.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+    return jsonify({"ok": True})
 
 
 if __name__ == "__main__":
