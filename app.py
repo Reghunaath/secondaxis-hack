@@ -1,13 +1,35 @@
 import csv
 import json
 import math
+import os
 from datetime import datetime
 from pathlib import Path
+import requests as http
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 CSV_FILE = Path("listings.csv")
 FEEDBACK_FILE = Path("feedback.json")
+
+JSONBIN_KEY = os.environ.get("JSONBIN_KEY")
+JSONBIN_ID  = os.environ.get("JSONBIN_ID")
+_JSONBIN_HEADERS = lambda: {"X-Master-Key": JSONBIN_KEY, "Content-Type": "application/json"}
+
+
+def _fb_read():
+    if JSONBIN_KEY and JSONBIN_ID:
+        r = http.get(f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest", headers=_JSONBIN_HEADERS())
+        return r.json().get("record", [])
+    if FEEDBACK_FILE.exists():
+        return json.loads(FEEDBACK_FILE.read_text(encoding="utf-8"))
+    return []
+
+
+def _fb_write(entries):
+    if JSONBIN_KEY and JSONBIN_ID:
+        http.put(f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}", headers=_JSONBIN_HEADERS(), json=entries)
+    else:
+        FEEDBACK_FILE.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def load_listings():
@@ -194,9 +216,7 @@ def api_listings():
 
 @app.route("/api/feedback", methods=["GET"])
 def get_feedback():
-    if not FEEDBACK_FILE.exists():
-        return jsonify([])
-    return jsonify(json.loads(FEEDBACK_FILE.read_text(encoding="utf-8")))
+    return jsonify(_fb_read())
 
 
 @app.route("/api/feedback", methods=["POST"])
@@ -205,14 +225,14 @@ def post_feedback():
     message = (data.get("message") or "").strip()
     if not message:
         return jsonify({"error": "message required"}), 400
-    entries = json.loads(FEEDBACK_FILE.read_text(encoding="utf-8")) if FEEDBACK_FILE.exists() else []
+    entries = _fb_read()
     entries.insert(0, {
         "name": (data.get("name") or "Anonymous").strip() or "Anonymous",
         "type": data.get("type") or "general",
         "message": message,
         "date": datetime.now().strftime("%b %d, %Y"),
     })
-    FEEDBACK_FILE.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+    _fb_write(entries)
     return jsonify({"ok": True})
 
 
