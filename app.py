@@ -103,6 +103,11 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
+
+
 @app.route("/api/listings")
 def api_listings():
     listings = load_listings()

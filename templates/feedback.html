@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback — HuskyHousing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --red: #D41B2C; --red-hover: #B81625; --red-light: #FEF2F2;
+            --blue: #2563EB; --green: #16A34A;  --orange: #EA580C;
+            --black: #111827; --gray-900: #1F2937; --gray-700: #374151;
+            --gray-600: #4B5563; --gray-500: #6B7280; --gray-400: #9CA3AF;
+            --gray-300: #D1D5DB; --gray-200: #E5E7EB; --gray-100: #F3F4F6;
+            --gray-50: #F9FAFB; --white: #FFFFFF;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #F8F7F6; color: var(--black); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        h1,h2,h3 { font-family: 'DM Sans', sans-serif; }
+
+        /* NAV */
+        .nav { background: var(--white); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 var(--gray-200); }
+        .nav::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--red); }
+        .nav-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 19px; color: var(--black); text-decoration: none; font-family: 'DM Sans', sans-serif; }
+        .nav-brand span { color: var(--red); }
+        .nav-link { font-size: 14px; font-weight: 500; color: var(--gray-600); text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: all 150ms; font-family: 'DM Sans', sans-serif; }
+        .nav-link:hover { color: var(--black); background: var(--gray-100); }
+        .nav-link.active { color: var(--red); background: var(--red-light); }
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 150ms ease; font-family: 'DM Sans', sans-serif; }
+        .btn-primary { background: var(--red); color: var(--white); box-shadow: 0 2px 4px rgba(212,27,44,.2); }
+        .btn-primary:hover { background: var(--red-hover); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* PAGE */
+        .page-wrap { max-width: 780px; margin: 0 auto; padding: 48px 24px 80px; }
+        .page-header { margin-bottom: 36px; }
+        .page-header h1 { font-size: 26px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+        .page-header p { font-size: 14px; color: var(--gray-500); max-width: 520px; }
+
+        /* FORM CARD */
+        .form-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 28px; margin-bottom: 40px; box-shadow: var(--shadow); }
+        .form-card h2 { font-size: 15px; font-weight: 600; margin-bottom: 20px; color: var(--black); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--gray-600); margin-bottom: 5px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 10px 13px; border: 1px solid var(--gray-200); border-radius: 8px;
+            font-size: 13px; font-family: inherit; color: var(--black); outline: none;
+            background: var(--gray-50); transition: border-color 150ms, background 150ms;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--red); background: var(--white); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-footer { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+        .success-msg { font-size: 13px; color: var(--green); display: none; }
+
+        /* FEEDBACK LIST */
+        .section-title { font-size: 15px; font-weight: 600; color: var(--black); margin-bottom: 16px; font-family: 'DM Sans', sans-serif; }
+        .fb-count { font-weight: 400; color: var(--gray-400); font-size: 14px; margin-left: 6px; }
+        .fb-list { display: flex; flex-direction: column; gap: 12px; }
+        .fb-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px 20px; box-shadow: var(--shadow-sm); }
+        .fb-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .fb-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+        .fb-meta { flex: 1; min-width: 0; }
+        .fb-name { font-weight: 600; font-size: 13px; color: var(--black); }
+        .fb-date { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
+        .fb-badge { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; }
+        .fb-message { font-size: 13px; color: var(--gray-700); line-height: 1.65; }
+        .empty-fb { text-align: center; padding: 40px; color: var(--gray-400); font-size: 13px; }
+        .empty-fb i { font-size: 28px; display: block; margin-bottom: 8px; color: var(--gray-300); }
+
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } .nav { padding: 12px 16px; } .page-wrap { padding: 28px 16px 60px; } }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <a href="/" class="nav-brand">
+        <i class="ph ph-house-line" style="font-size:22px;color:var(--red)"></i>
+        Husky<span>Housing</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:8px;">
+        <a href="/" class="nav-link">Listings</a>
+        <a href="/feedback" class="nav-link active">Feedback</a>
+    </div>
+</nav>
+
+<div class="page-wrap">
+    <div class="page-header">
+        <h1>Community Feedback</h1>
+        <p>HuskyHousing is in its very early stages. Tell us what's working, what's broken, or what you'd love to see next.</p>
+    </div>
+
+    <!-- Submit form -->
+    <div class="form-card">
+        <h2>Share your thoughts</h2>
+        <form id="feedbackForm" onsubmit="submitFeedback(event)">
+            <div class="form-row">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>Name <span style="color:var(--gray-400);">(optional)</span></label>
+                    <input id="fbName" type="text" placeholder="Your name">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>Type</label>
+                    <select id="fbType">
+                        <option value="general">General</option>
+                        <option value="bug">Bug report</option>
+                        <option value="feature">Feature request</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:14px;">
+                <label>Feedback <span style="color:var(--red);">*</span></label>
+                <textarea id="fbMessage" required placeholder="What do you think? What's missing or broken?"></textarea>
+            </div>
+            <div class="form-footer">
+                <button type="submit" id="fbSubmitBtn" class="btn btn-primary">
+                    <i class="ph ph-paper-plane-tilt"></i> Submit
+                </button>
+                <span id="fbStatus" class="success-msg"><i class="ph ph-check-circle"></i> Thanks for your feedback!</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- Feedback list -->
+    <div class="section-title">All feedback <span class="fb-count" id="fbCountLabel"></span></div>
+    <div class="fb-list" id="feedbackList">
+        <div class="empty-fb"><i class="ph ph-spinner" style="animation:spin 1s linear infinite"></i> Loading…</div>
+    </div>
+</div>
+
+<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+
+<script>
+const TYPE_LABEL = { general: 'General', bug: 'Bug Report', feature: 'Feature Request' };
+const TYPE_COLOR = { general: '#2563EB', bug: '#D41B2C', feature: '#16A34A' };
+
+function escHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function loadFeedback() {
+    const res = await fetch('/api/feedback');
+    const data = await res.json();
+    const list = document.getElementById('feedbackList');
+    const countLabel = document.getElementById('fbCountLabel');
+    countLabel.textContent = `(${data.length})`;
+    if (!data.length) {
+        list.innerHTML = '<div class="empty-fb"><i class="ph ph-chat-dots"></i>No feedback yet — be the first!</div>';
+        return;
+    }
+    list.innerHTML = data.map(f => {
+        const color = TYPE_COLOR[f.type] || '#6B7280';
+        const label = TYPE_LABEL[f.type] || f.type;
+        const initials = (f.name || 'A').trim().split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+        return `<div class="fb-card">
+            <div class="fb-card-header">
+                <div class="fb-avatar" style="background:${color}18;color:${color};">${escHtml(initials)}</div>
+                <div class="fb-meta">
+                    <div class="fb-name">${escHtml(f.name || 'Anonymous')}</div>
+                    <div class="fb-date">${escHtml(f.date)}</div>
+                </div>
+                <span class="fb-badge" style="color:${color};background:${color}18;">${escHtml(label)}</span>
+            </div>
+            <p class="fb-message">${escHtml(f.message)}</p>
+        </div>`;
+    }).join('');
+}
+
+async function submitFeedback(e) {
+    e.preventDefault();
+    const btn = document.getElementById('fbSubmitBtn');
+    btn.disabled = true;
+    const payload = {
+        name: document.getElementById('fbName').value.trim(),
+        type: document.getElementById('fbType').value,
+        message: document.getElementById('fbMessage').value.trim(),
+    };
+    await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    });
+    const status = document.getElementById('fbStatus');
+    status.style.display = 'inline-flex';
+    status.style.alignItems = 'center';
+    status.style.gap = '5px';
+    document.getElementById('feedbackForm').reset();
+    btn.disabled = false;
+    setTimeout(() => status.style.display = 'none', 4000);
+    loadFeedback();
+}
+
+loadFeedback();
+</script>
+</body>
+</html>
