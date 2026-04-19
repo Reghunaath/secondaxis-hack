@@ -1,0 +1,114 @@
+[    1405ms] [LOG] Gather usage stats:  true @ http://localhost:8501/static/js/main.75ac1cb6.js:9
+[    4239ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4268ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4268ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4302ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4309ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4309ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4366ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4371ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4371ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4373ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4378ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[    4379ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17603ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17609ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17609ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17617ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17621ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17621ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17628ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17632ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[   17632ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  139954ms] [LOG] Gather usage stats:  true @ http://localhost:8501/static/js/main.75ac1cb6.js:9
+[  140225ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140236ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140236ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140240ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140245ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140245ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140246ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140249ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140249ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140275ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140279ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140279ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140286ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140291ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140291ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140301ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140304ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  140304ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238366ms] [LOG] Gather usage stats:  true @ http://localhost:8501/static/js/main.75ac1cb6.js:9
+[  238494ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238502ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238503ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238506ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238510ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238510ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238562ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238570ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238570ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238593ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238599ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238599ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238648ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238651ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  238651ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250239ms] [LOG] Gather usage stats:  true @ http://localhost:8501/static/js/main.75ac1cb6.js:9
+[  250452ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250461ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250462ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250465ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250469ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250469ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250470ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250474ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250474ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250519ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250523ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250523ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250532ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250537ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250537ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250547ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250552ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  250552ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294598ms] [LOG] Gather usage stats:  true @ http://localhost:8501/static/js/main.75ac1cb6.js:9
+[  294813ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294823ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294824ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294826ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294830ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294830ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294834ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294839ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294839ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294869ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294872ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294872ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294881ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294888ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294888ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294896ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294903ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  294903ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298101ms] [LOG] Gather usage stats:  true @ http://localhost:8501/static/js/main.75ac1cb6.js:9
+[  298309ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298317ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298317ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298320ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298324ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298324ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298325ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298329ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298329ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298355ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298359ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298359ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298368ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298372ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298372ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298380ms] [WARNING] WARN Scale bindings are currently only supported for scales with unbinned, continuous domains. @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298385ms] [WARNING] WARN Infinite extent for field "count_start": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1
+[  298386ms] [WARNING] WARN Infinite extent for field "count_end": [Infinity, -Infinity] @ http://localhost:8501/static/js/7612.3f409b56.chunk.js:1

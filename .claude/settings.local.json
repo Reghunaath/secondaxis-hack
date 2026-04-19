@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python scraper.py)",
+      "Bash(python -c ' *)",
+      "Bash(start /B streamlit run dashboard.py --server.port 8501)",
+      "Bash(streamlit run *)",
+      "Bash(ping -n 5 127.0.0.1)",
+      "Bash(curl -s -o nul -w \"%{http_code}\" http://localhost:8501)",
+      "mcp__playwright__browser_navigate",
+      "Bash(ping -n 6 127.0.0.1)",
+      "Bash(taskkill /F /IM streamlit.exe)",
+      "Bash(taskkill /F /FI \"WINDOWTITLE eq streamlit*\")",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8501)",
+      "Bash(taskkill *)",
+      "Bash(cmd *)",
+      "Bash(python -c \"import flask; print\\('flask ok'\\)\")",
+      "Bash(python *)",
+      "Bash(curl -s http://localhost:5000/api/listings?page=1)",
+      "Bash(curl -s \"http://localhost:5000/api/listings?page=1&page_size=2\")",
+      "mcp__playwright__browser_take_screenshot",
+      "Bash(curl -s http://localhost:5000)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)"
+    ]
+  }
+}

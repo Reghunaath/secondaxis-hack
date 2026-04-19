@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuskyHousing — Northeastern Student Housing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --red: #D41B2C;
+            --red-hover: #B81625;
+            --red-light: #FEF2F2;
+            --blue: #2563EB;
+            --blue-light: #EFF6FF;
+            --orange: #EA580C;
+            --orange-light: #FFF7ED;
+            --green: #16A34A;
+            --green-light: #F0FDF4;
+            --black: #111827;
+            --gray-900: #1F2937;
+            --gray-700: #374151;
+            --gray-600: #4B5563;
+            --gray-500: #6B7280;
+            --gray-400: #9CA3AF;
+            --gray-300: #D1D5DB;
+            --gray-200: #E5E7EB;
+            --gray-100: #F3F4F6;
+            --gray-50: #F9FAFB;
+            --warm-bg: #F8F7F6;
+            --white: #FFFFFF;
+            --radius: 8px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--warm-bg); color: var(--black); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        h1,h2,h3,.nav-brand,.card-price,.chip { font-family: 'DM Sans', sans-serif; }
+
+        /* NAV */
+        .nav { background: var(--white); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 var(--gray-200); }
+        .nav::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--red); }
+        .nav-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 19px; color: var(--black); text-decoration: none; }
+        .nav-brand span { color: var(--red); }
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: var(--radius); font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: all 150ms ease; font-family: 'DM Sans', sans-serif; }
+        .btn-primary { background: var(--red); color: var(--white); box-shadow: 0 2px 4px rgba(212,27,44,.2); }
+        .btn-primary:hover { background: var(--red-hover); }
+        .btn-secondary { background: var(--white); color: var(--gray-700); border: 1px solid var(--gray-300); }
+        .btn-secondary:hover { background: var(--gray-50); }
+
+        /* HERO */
+        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%); padding: 56px 32px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(212,27,44,.06) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(37,99,235,.04) 0%, transparent 50%); }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'%3E%3Crect x='80' y='60' width='40' height='140' fill='%23ffffff' opacity='0.02'/%3E%3Crect x='180' y='40' width='50' height='160' fill='%23ffffff' opacity='0.02'/%3E%3Crect x='370' y='50' width='55' height='150' fill='%23ffffff' opacity='0.018'/%3E%3Crect x='500' y='30' width='60' height='170' fill='%23ffffff' opacity='0.02'/%3E%3Crect x='720' y='45' width='45' height='155' fill='%23ffffff' opacity='0.02'/%3E%3Crect x='850' y='55' width='55' height='145' fill='%23ffffff' opacity='0.02'/%3E%3Crect x='990' y='35' width='50' height='165' fill='%23ffffff' opacity='0.02'/%3E%3C/svg%3E") no-repeat bottom center; background-size: cover; pointer-events: none; }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { font-size: 32px; font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: -.3px; }
+        .hero h1 span { color: var(--red); }
+        .hero p { font-size: 15px; color: rgba(255,255,255,.6); max-width: 500px; margin: 0 auto 28px; }
+        .search-bar { display: flex; align-items: center; max-width: 560px; margin: 0 auto 24px; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,.2), 0 0 0 1px rgba(255,255,255,.1); transition: box-shadow 150ms; }
+        .search-bar:focus-within { box-shadow: 0 4px 24px rgba(212,27,44,.2), 0 0 0 2px var(--red); }
+        .search-bar input { flex: 1; padding: 14px 18px; border: none; outline: none; font-size: 14px; font-family: inherit; color: var(--black); background: transparent; }
+        .search-bar input::placeholder { color: var(--gray-400); }
+        .search-bar button { padding: 14px 22px; background: var(--red); color: var(--white); border: none; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 150ms; display: flex; align-items: center; gap: 6px; }
+        .search-bar button:hover { background: var(--red-hover); }
+        .filter-chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .chip { padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.06); color: rgba(255,255,255,.8); transition: all 150ms; display: inline-flex; align-items: center; gap: 6px; }
+        .chip:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); color: var(--white); }
+        .chip.active { background: var(--red); border-color: var(--red); color: var(--white); }
+        .chip-count { background: rgba(255,255,255,.2); padding: 1px 6px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+        .chip.active .chip-count { background: rgba(255,255,255,.3); }
+
+        /* LAYOUT */
+        .main-layout { display: flex; max-width: 1400px; margin: 0 auto; padding: 24px 32px; gap: 24px; }
+
+        /* SIDEBAR */
+        .sidebar { width: 264px; flex-shrink: 0; }
+        .sidebar-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
+        .sidebar-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--gray-200); }
+        .sidebar-top h3 { font-size: 14px; font-weight: 600; color: var(--gray-900); font-family: 'DM Sans', sans-serif; }
+        .clear-btn { font-size: 12px; color: var(--red); cursor: pointer; border: none; background: none; font-weight: 500; padding: 2px 6px; border-radius: 4px; transition: background 150ms; }
+        .clear-btn:hover { background: var(--red-light); }
+        .sidebar-section { padding: 14px 16px; border-bottom: 1px solid var(--gray-100); }
+        .sidebar-section:last-child { border-bottom: none; }
+        .sidebar-section h4 { font-size: 11px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 10px; font-family: 'DM Sans', sans-serif; }
+        .sidebar-section label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray-700); cursor: pointer; padding: 4px 0; transition: color 150ms; }
+        .sidebar-section label:hover { color: var(--black); }
+        .sidebar-section input[type="checkbox"] { accent-color: var(--red); width: 15px; height: 15px; }
+        .sidebar-section select { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px; font-family: inherit; color: var(--gray-700); background: var(--gray-50); cursor: pointer; outline: none; transition: border-color 150ms; }
+        .sidebar-section select:focus { border-color: var(--red); }
+        .price-slider-wrap { padding: 4px 0; }
+        .price-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-500); margin-bottom: 8px; }
+        .price-labels span { font-weight: 500; color: var(--gray-900); }
+        .dual-range { position: relative; height: 24px; margin: 8px 0; }
+        .range-track { position: absolute; top: 50%; left: 0; right: 0; height: 4px; transform: translateY(-50%); background: var(--gray-200); border-radius: 2px; pointer-events: none; }
+        .range-track::after { content: ''; position: absolute; height: 100%; background: var(--red); border-radius: 2px; left: var(--range-left,0%); right: var(--range-right,0%); }
+        .price-slider { position: absolute; top: 0; left: 0; width: 100%; -webkit-appearance: none; appearance: none; height: 24px; background: transparent; outline: none; pointer-events: none; margin: 0; }
+        .price-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--white); border: 3px solid var(--red); cursor: pointer; pointer-events: all; box-shadow: 0 1px 4px rgba(212,27,44,.3); }
+        .price-slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--white); border: 3px solid var(--red); cursor: pointer; pointer-events: all; }
+        .price-inputs { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .price-inputs input { flex: 1; padding: 8px 10px; border: 1px solid var(--gray-300); border-radius: 6px; font-size: 13px; font-family: inherit; outline: none; background: var(--white); text-align: center; color: var(--gray-900); min-width: 0; }
+        .price-inputs input:focus { border-color: var(--red); }
+        .price-inputs span { color: var(--gray-500); font-size: 13px; }
+        .pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        .pill-btn { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--gray-200); background: var(--gray-50); color: var(--gray-600); transition: all 150ms; font-family: 'DM Sans', sans-serif; }
+        .pill-btn:hover { border-color: var(--gray-300); background: var(--white); }
+        .pill-btn.active { background: var(--red-light); border-color: var(--red); color: var(--red); font-weight: 600; }
+
+        /* LISTINGS */
+        .listings-area { flex: 1; min-width: 0; }
+        .listings-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .listings-header h2 { font-size: 16px; font-weight: 600; color: var(--gray-900); font-family: 'DM Sans', sans-serif; }
+        .listings-header select { padding: 7px 12px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px; font-family: inherit; color: var(--gray-700); background: var(--white); cursor: pointer; outline: none; box-shadow: var(--shadow-sm); }
+        .listings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+        /* CARD */
+        .listing-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: box-shadow 200ms, transform 200ms; box-shadow: var(--shadow); position: relative; }
+        .listing-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 8px 0 0 8px; }
+        .listing-card[data-type="Temporary"]::before { background: var(--orange); }
+        .listing-card[data-type="Permanent"]::before { background: var(--blue); }
+        .listing-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+        .card-body { padding: 14px 16px; }
+        .card-tag { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; font-family: 'DM Sans', sans-serif; margin-bottom: 8px; }
+        .tag-temporary { background: var(--orange-light); color: var(--orange); }
+        .tag-permanent { background: var(--blue-light); color: var(--blue); }
+        .tag-seeking { background: #F0FDF4; color: var(--green); }
+        .card-title { font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'DM Sans', sans-serif; }
+        .card-price { font-size: 22px; font-weight: 700; color: var(--red); margin-bottom: 10px; letter-spacing: -.5px; }
+        .card-price span { font-size: 13px; font-weight: 400; color: var(--gray-400); }
+        .card-price.no-rent { font-size: 14px; color: var(--gray-400); }
+        .card-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; font-size: 12px; color: var(--gray-600); }
+        .card-meta-item { display: flex; align-items: center; gap: 3px; }
+        .card-desc { font-size: 13px; color: var(--gray-500); margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.5; }
+        .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--gray-100); }
+        .card-location { font-size: 12px; color: var(--gray-500); display: flex; align-items: center; gap: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
+        .btn-contact { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; background: var(--red); color: var(--white); border: none; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 150ms; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
+        .btn-contact:hover { background: var(--red-hover); box-shadow: 0 2px 6px rgba(212,27,44,.25); }
+        .btn-contact.no-contact { background: var(--gray-200); color: var(--gray-500); cursor: default; }
+
+        /* BADGES */
+        .badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 7px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+        .badge-green { background: var(--green-light); color: var(--green); }
+        .badge-orange { background: var(--orange-light); color: var(--orange); }
+        .badge-blue { background: var(--blue-light); color: var(--blue); }
+        .badge-gray { background: var(--gray-100); color: var(--gray-600); }
+
+        /* PAGINATION */
+        .pagination { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; padding: 16px 0; }
+        .page-btn { min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: 1px solid var(--gray-200); background: var(--white); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 150ms; color: var(--gray-700); padding: 0 10px; font-family: 'DM Sans', sans-serif; }
+        .page-btn:hover { border-color: var(--red); color: var(--red); }
+        .page-btn.active { background: var(--red); color: var(--white); border-color: var(--red); }
+        .page-btn:disabled { opacity: .4; cursor: default; pointer-events: none; }
+
+        /* MODAL */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(2px); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: var(--white); border-radius: 10px; max-width: 640px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+        .modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--gray-100); gap: 16px; }
+        .modal-header h2 { font-size: 17px; font-weight: 600; font-family: 'DM Sans', sans-serif; line-height: 1.4; }
+        .modal-close { min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; border: none; background: transparent; cursor: pointer; color: var(--gray-500); font-size: 20px; transition: background 150ms; }
+        .modal-close:hover { background: var(--gray-100); }
+        .modal-body { padding: 24px; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .detail-item { background: var(--gray-50); padding: 10px 12px; border-radius: 6px; }
+        .detail-item label { display: block; font-size: 11px; color: var(--gray-500); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .3px; }
+        .detail-item span { font-size: 13px; font-weight: 500; color: var(--gray-900); word-break: break-word; }
+        .modal-desc { font-size: 13px; color: var(--gray-700); line-height: 1.7; margin-bottom: 20px; white-space: pre-wrap; word-break: break-word; max-height: 220px; overflow-y: auto; background: var(--gray-50); padding: 14px; border-radius: 6px; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid var(--gray-100); display: flex; justify-content: flex-end; gap: 12px; }
+        .amenities-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+
+        /* POST FORM */
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--gray-600); margin-bottom: 4px; font-family: 'DM Sans', sans-serif; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px; font-family: inherit; color: var(--black); outline: none; background: var(--gray-50); transition: border-color 150ms, background 150ms; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--red); background: var(--white); }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        /* STATES */
+        .empty-state { text-align: center; padding: 48px 24px; color: var(--gray-500); grid-column: 1/-1; }
+        .empty-state i { font-size: 32px; margin-bottom: 12px; display: block; color: var(--gray-300); }
+        .loading { display: flex; align-items: center; justify-content: center; padding: 64px; color: var(--gray-400); font-size: 14px; grid-column: 1/-1; }
+
+        @media (max-width: 1200px) { .listings-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 768px) { .main-layout { flex-direction: column; padding: 16px; } .sidebar { width: 100%; } .listings-grid { grid-template-columns: 1fr; } .hero { padding: 40px 20px 36px; } .hero h1 { font-size: 24px; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="#" class="nav-brand">
+        <i class="ph ph-house-line" style="font-size:22px;color:var(--red)"></i>
+        Husky<span>Housing</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn btn-primary" disabled style="opacity:0.45;cursor:not-allowed;pointer-events:none;">
+            <i class="ph ph-plus"></i> Post a Listing
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Find your next place with <span>HuskyHousing</span></h1>
+        <p>Stop scrolling through 1000 WhatsApp messages. Browse verified student listings in one place.</p>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by keyword, location, or description..." oninput="debounceFilter()">
+            <button onclick="doFilter()"><i class="ph ph-magnifying-glass"></i> Search</button>
+        </div>
+        <div class="filter-chips">
+            <span class="chip active" data-type="all" onclick="setTypeFilter('all',this)">All <span class="chip-count" id="count-all">—</span></span>
+            <span class="chip" data-type="Temporary" onclick="setTypeFilter('Temporary',this)">Temporary <span class="chip-count" id="count-Temporary">—</span></span>
+            <span class="chip" data-type="Permanent" onclick="setTypeFilter('Permanent',this)">Permanent <span class="chip-count" id="count-Permanent">—</span></span>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN -->
+<div class="main-layout">
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <div class="sidebar-top">
+                <h3>Filters</h3>
+                <button class="clear-btn" onclick="clearAllFilters()">Clear all</button>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Neighborhood</h4>
+                <div id="neighborhoodList"><!-- populated by JS --></div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Price Range</h4>
+                <div class="price-slider-wrap">
+                    <div class="price-labels">
+                        <span id="priceMinLabel">$0</span>
+                        <span id="priceMaxLabel">$4,000</span>
+                    </div>
+                    <div class="dual-range">
+                        <div class="range-track" id="rangeTrack"></div>
+                        <input type="range" class="price-slider" id="priceSliderMin" min="0" max="4000" step="50" value="0" oninput="updatePriceRange()">
+                        <input type="range" class="price-slider" id="priceSliderMax" min="0" max="4000" step="50" value="4000" oninput="updatePriceRange()">
+                    </div>
+                    <div class="price-inputs">
+                        <input type="number" id="priceMin" placeholder="$0" oninput="syncSliders()">
+                        <span>to</span>
+                        <input type="number" id="priceMax" placeholder="$4,000" oninput="syncSliders()">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Move-in Month</h4>
+                <select id="moveInMonth" onchange="doFilter()">
+                    <option value="">Any month</option>
+                    <option>Jan</option><option>Feb</option><option>Mar</option>
+                    <option>Apr</option><option>May</option><option>Jun</option>
+                    <option>Jul</option><option>Aug</option><option>Sep</option>
+                    <option>Oct</option><option>Nov</option><option>Dec</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Bedrooms</h4>
+                <div class="pill-group">
+                    <span class="pill-btn active" data-beds="" onclick="setBedFilter('',this)">Any</span>
+                    <span class="pill-btn" data-beds="1" onclick="setBedFilter('1',this)">1</span>
+                    <span class="pill-btn" data-beds="2" onclick="setBedFilter('2',this)">2</span>
+                    <span class="pill-btn" data-beds="3" onclick="setBedFilter('3',this)">3</span>
+                    <span class="pill-btn" data-beds="4+" onclick="setBedFilter('4+',this)">4+</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Preferences</h4>
+                <label><input type="checkbox" id="filterRedEye" onchange="doFilter()"> Red Eye accessible</label>
+                <label><input type="checkbox" id="filterNoBroker" onchange="doFilter()"> No broker fee</label>
+                <label><input type="checkbox" id="filterKitchen" onchange="doFilter()"> Equipped kitchen</label>
+                <label><input type="checkbox" id="filterLaundry" onchange="doFilter()"> In-unit laundry</label>
+            </div>
+        </div>
+    </aside>
+
+    <main class="listings-area">
+        <div class="listings-header">
+            <h2 id="listingsCount">Loading…</h2>
+            <select id="sortSelect" onchange="doFilter()">
+                <option value="newest">Sort: Newest</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+            </select>
+        </div>
+        <div class="listings-grid" id="listingsGrid">
+            <div class="loading"><i class="ph ph-spinner" style="margin-right:8px;animation:spin 1s linear infinite"></i> Loading listings…</div>
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </main>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="modalTitle">Listing Details</h2>
+            <button class="modal-close" onclick="closeDetailModal()"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeDetailModal()">Close</button>
+            <button class="btn btn-primary" id="modalContact" style="padding:10px 20px;">
+                <i class="ph ph-whatsapp-logo"></i> Contact
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- POST MODAL -->
+<div class="modal-overlay" id="postModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Post a Listing</h2>
+            <button class="modal-close" onclick="closePostModal()"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="modal-body">
+            <form onsubmit="submitListing(event)">
+                <div class="form-row">
+                    <div class="form-group"><label>Your Name</label><input type="text" required placeholder="John Doe"></div>
+                    <div class="form-group"><label>WhatsApp Number</label><input type="tel" required placeholder="+1 (617) 000-0000"></div>
+                </div>
+                <div class="form-group"><label>Housing Type</label>
+                    <select required><option value="">Select…</option><option>Temporary</option><option>Permanent</option></select>
+                </div>
+                <div class="form-group"><label>Listing Title</label><input type="text" required placeholder="e.g. Sunny 2BR in Mission Hill"></div>
+                <div class="form-group"><label>Description</label><textarea required placeholder="Describe the space, amenities, roommates, etc."></textarea></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Monthly Rent ($)</label><input type="number" required placeholder="1200"></div>
+                    <div class="form-group"><label>Neighborhood</label><select required id="postNeighborhood"><option value="">Select…</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Bedrooms</label>
+                        <select required><option>1</option><option>2</option><option>3</option><option>4+</option></select>
+                    </div>
+                    <div class="form-group"><label>Bathrooms</label>
+                        <select required><option>1</option><option>2</option><option>3+</option></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Move-in Date</label><input type="date" required></div>
+                    <div class="form-group"><label>Duration</label><input type="text" required placeholder="e.g. May – August"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" disabled style="width:100%;justify-content:center;padding:12px;margin-top:4px;opacity:0.5;cursor:not-allowed;">
+                    <i class="ph ph-paper-plane-tilt"></i> Post Listing
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script>
+let state = {
+    type: 'all',
+    beds: '',
+    page: 1,
+    allListings: [],     // full page for client-side detail lookup
+};
+
+let debounceTimer = null;
+function debounceFilter() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(doFilter, 300);
+}
+
+// ── Build API URL from current UI state ───────────────────────────────────────
+function buildParams(page = 1) {
+    const p = new URLSearchParams();
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) p.set('q', q);
+    if (state.type !== 'all') p.set('type', state.type);
+    const priceMin = parseInt(document.getElementById('priceMin').value) || 0;
+    const priceMax = parseInt(document.getElementById('priceMax').value) || 0;
+    if (priceMin > 0) p.set('price_min', priceMin);
+    if (priceMax > 0) p.set('price_max', priceMax);
+    const moveIn = document.getElementById('moveInMonth').value;
+    if (moveIn) p.set('move_month', moveIn);
+    if (state.beds) p.set('beds', state.beds);
+    p.set('sort', document.getElementById('sortSelect').value);
+    p.set('page', page);
+    p.set('page_size', 30);
+    // neighborhood checkboxes
+    document.querySelectorAll('#neighborhoodList input:checked').forEach(cb => p.append('neighborhood', cb.value));
+    return p;
+}
+
+// ── Fetch & render ─────────────────────────────────────────────────────────────
+async function doFilter(page = 1) {
+    state.page = page;
+    const params = buildParams(page);
+    const res = await fetch('/api/listings?' + params.toString());
+    const data = await res.json();
+
+    state.allListings = data.listings;
+
+    // update chip counts (only on first load or unfiltered fetch)
+    if (data.type_counts) {
+        document.getElementById('count-all').textContent = data.type_counts.all ?? '—';
+        document.getElementById('count-Temporary').textContent = data.type_counts.Temporary ?? '—';
+        document.getElementById('count-Permanent').textContent = data.type_counts.Permanent ?? '—';
+    }
+
+    // populate neighborhoods once
+    if (data.neighborhoods && document.getElementById('neighborhoodList').children.length === 0) {
+        populateNeighborhoods(data.neighborhoods);
+    }
+
+    renderListings(data.listings, data.total);
+    renderPagination(page, data.pages, data.total);
+}
+
+function populateNeighborhoods(list) {
+    const container = document.getElementById('neighborhoodList');
+    const postSel = document.getElementById('postNeighborhood');
+    list.forEach(n => {
+        const lbl = document.createElement('label');
+        lbl.innerHTML = `<input type="checkbox" value="${n}" onchange="doFilter()"> ${n}`;
+        container.appendChild(lbl);
+        const opt = document.createElement('option');
+        opt.value = n; opt.textContent = n;
+        postSel.appendChild(opt);
+    });
+}
+
+// ── Cards ─────────────────────────────────────────────────────────────────────
+function tagClass(type) { return type === 'Temporary' ? 'tag-temporary' : 'tag-permanent'; }
+
+function rentHTML(l) {
+    if (l.rent) return `<div class="card-price">$${l.rent.toLocaleString()}<span>/mo</span></div>`;
+    return `<div class="card-price no-rent">Price on request</div>`;
+}
+
+function renderListings(items, total) {
+    const grid = document.getElementById('listingsGrid');
+    document.getElementById('listingsCount').textContent =
+        `${total.toLocaleString()} Listing${total !== 1 ? 's' : ''}`;
+
+    if (items.length === 0) {
+        grid.innerHTML = `<div class="empty-state">
+            <i class="ph ph-house"></i>
+            <p>No listings match your filters.</p>
+        </div>`;
+        return;
+    }
+
+    // Client-side preference filters
+    const redEye  = document.getElementById('filterRedEye').checked;
+    const noBroker = document.getElementById('filterNoBroker').checked;
+    const kitchen  = document.getElementById('filterKitchen').checked;
+    const laundry  = document.getElementById('filterLaundry').checked;
+
+    const visible = items.filter(l => {
+        if (redEye   && !l.red_eye) return false;
+        if (noBroker && l.broker_fee !== 'none') return false;
+        if (kitchen  && !l.kitchen) return false;
+        if (laundry  && l.laundry !== 'in_unit') return false;
+        return true;
+    });
+
+    if (visible.length === 0) {
+        grid.innerHTML = `<div class="empty-state"><i class="ph ph-funnel"></i><p>No listings match these preferences.</p></div>`;
+        return;
+    }
+
+    grid.innerHTML = visible.map(l => {
+        const beds = l.beds && l.beds !== '?' ? `<span class="card-meta-item"><i class="ph ph-bed"></i> ${l.beds}BR</span>` : '';
+        const baths = l.baths && l.baths !== '?' ? `<span class="card-meta-item"><i class="ph ph-bathtub"></i> ${l.baths}BA</span>` : '';
+        const walk = l.walk_neu ? `<span class="card-meta-item"><i class="ph ph-person-simple-walk"></i> ${l.walk_neu} min</span>` : '';
+        const contactBtn = l.whatsapp
+            ? `<button class="btn-contact" onclick="event.stopPropagation();window.open('https://wa.me/${l.whatsapp}','_blank')"><i class="ph ph-whatsapp-logo"></i> Contact</button>`
+            : `<button class="btn-contact no-contact" disabled>No contact</button>`;
+
+        return `<div class="listing-card" data-type="${l.type}" onclick="openDetail(${l.id})">
+            <div class="card-body">
+                <span class="card-tag ${tagClass(l.type)}">${l.type}</span>
+                <div class="card-title">${escHtml(l.title)}</div>
+                ${rentHTML(l)}
+                <div class="card-meta">${beds}${baths}${walk}</div>
+                <div class="card-desc">${escHtml(l.desc)}</div>
+                <div class="card-footer">
+                    <span class="card-location"><i class="ph ph-map-pin"></i> ${escHtml(l.neighborhood)}</span>
+                    ${contactBtn}
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ── Pagination ────────────────────────────────────────────────────────────────
+function renderPagination(page, pages, total) {
+    const el = document.getElementById('pagination');
+    if (pages <= 1) { el.innerHTML = ''; return; }
+    const range = [];
+    for (let i = Math.max(1, page-2); i <= Math.min(pages, page+2); i++) range.push(i);
+    el.innerHTML =
+        `<button class="page-btn" onclick="doFilter(${page-1})" ${page===1?'disabled':''}>
+            <i class="ph ph-caret-left"></i>
+         </button>` +
+        (range[0] > 1 ? `<button class="page-btn" onclick="doFilter(1)">1</button>${range[0]>2?'<span style="padding:0 4px;color:var(--gray-400)">…</span>':''}` : '') +
+        range.map(p => `<button class="page-btn${p===page?' active':''}" onclick="doFilter(${p})">${p}</button>`).join('') +
+        (range[range.length-1] < pages ? `${range[range.length-1]<pages-1?'<span style="padding:0 4px;color:var(--gray-400)">…</span>':''}<button class="page-btn" onclick="doFilter(${pages})">${pages}</button>` : '') +
+        `<button class="page-btn" onclick="doFilter(${page+1})" ${page===pages?'disabled':''}>
+            <i class="ph ph-caret-right"></i>
+         </button>`;
+}
+
+// ── Detail modal ──────────────────────────────────────────────────────────────
+function openDetail(id) {
+    const l = state.allListings.find(x => x.id === id);
+    if (!l) return;
+
+    document.getElementById('modalTitle').textContent = l.title;
+
+    const badge = (label, cls) => label ? `<span class="badge ${cls}">${label}</span>` : '';
+    const amenities = [
+        l.laundry === 'in_unit' ? badge('<i class="ph ph-washing-machine"></i> In-unit laundry', 'badge-green') : '',
+        l.laundry === 'in_building' ? badge('<i class="ph ph-washing-machine"></i> Laundry in building', 'badge-gray') : '',
+        l.kitchen ? badge('<i class="ph ph-cooking-pot"></i> Equipped kitchen', 'badge-green') : '',
+        l.red_eye ? badge('<i class="ph ph-bus"></i> Red Eye', 'badge-blue') : '',
+        l.furnished ? badge('<i class="ph ph-couch"></i> ' + l.furnished.replace('_',' '), 'badge-orange') : '',
+        l.heat === 'True' ? badge('<i class="ph ph-thermometer"></i> Heat incl.', 'badge-green') : '',
+        l.water === 'True' ? badge('<i class="ph ph-drop"></i> Water incl.', 'badge-green') : '',
+        l.parking === 'True' ? badge('<i class="ph ph-car"></i> Parking', 'badge-gray') : '',
+    ].filter(Boolean).join('');
+
+    const detailRow = (label, val) => val ? `<div class="detail-item"><label>${label}</label><span>${escHtml(String(val))}</span></div>` : '';
+
+    document.getElementById('modalBody').innerHTML = `
+        <span class="card-tag ${tagClass(l.type)}" style="margin-bottom:14px;">${l.type}</span>
+        ${l.rent ? `<div class="card-price" style="font-size:26px;margin-bottom:18px;">$${l.rent.toLocaleString()}<span>/mo</span></div>` : ''}
+        <div class="detail-grid">
+            ${detailRow('Address', l.address || l.neighborhood)}
+            ${detailRow('Neighborhood', l.neighborhood)}
+            ${detailRow('Move-in', l.available_from)}
+            ${detailRow('Lease end', l.lease_end)}
+            ${detailRow('Bedrooms', l.beds !== '?' ? l.beds : '')}
+            ${detailRow('Bathrooms', l.baths !== '?' ? l.baths : '')}
+            ${detailRow('Gender pref.', l.gender)}
+            ${detailRow('Food pref.', l.food ? l.food.replace(/_/g,' ') : '')}
+            ${detailRow('Walk to NEU', l.walk_neu ? l.walk_neu + ' min' : '')}
+            ${detailRow('Transit', l.transit)}
+            ${detailRow('Broker fee', l.broker_fee)}
+            ${detailRow('On lease', l.on_lease)}
+            ${detailRow('Posted', l.posted)}
+        </div>
+        ${amenities ? `<div class="amenities-row">${amenities}</div>` : ''}
+        <div class="modal-desc">${escHtml(l.full_desc)}</div>
+    `;
+
+    const contactBtn = document.getElementById('modalContact');
+    if (l.whatsapp) {
+        contactBtn.onclick = () => window.open('https://wa.me/' + l.whatsapp, '_blank');
+        contactBtn.disabled = false;
+        contactBtn.innerHTML = '<i class="ph ph-whatsapp-logo"></i> Contact on WhatsApp';
+    } else if (l.contact_raw) {
+        contactBtn.onclick = null;
+        contactBtn.disabled = true;
+        contactBtn.innerHTML = '<i class="ph ph-phone"></i> ' + escHtml(l.contact_raw.slice(0, 40));
+    } else {
+        contactBtn.onclick = null;
+        contactBtn.disabled = true;
+        contactBtn.innerHTML = 'No contact info';
+    }
+
+    document.getElementById('detailModal').classList.add('active');
+}
+function closeDetailModal() { document.getElementById('detailModal').classList.remove('active'); }
+function openPostModal() { document.getElementById('postModal').classList.add('active'); }
+function closePostModal() { document.getElementById('postModal').classList.remove('active'); }
+function submitListing(e) { e.preventDefault(); alert('Listing submitted!'); closePostModal(); e.target.reset(); }
+
+// ── Filter controls ───────────────────────────────────────────────────────────
+function setTypeFilter(type, el) {
+    state.type = type;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    doFilter();
+}
+function setBedFilter(beds, el) {
+    state.beds = beds;
+    document.querySelectorAll('.pill-btn').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    doFilter();
+}
+function updatePriceRange() {
+    const min = +document.getElementById('priceSliderMin').value;
+    const max = +document.getElementById('priceSliderMax').value;
+    document.getElementById('priceMinLabel').textContent = '$' + min.toLocaleString();
+    document.getElementById('priceMaxLabel').textContent = '$' + max.toLocaleString();
+    document.getElementById('priceMin').value = min > 0 ? min : '';
+    document.getElementById('priceMax').value = max < 4000 ? max : '';
+    updateRangeTrack();
+    doFilter();
+}
+function syncSliders() {
+    const min = +document.getElementById('priceMin').value || 0;
+    const max = +document.getElementById('priceMax').value || 4000;
+    document.getElementById('priceSliderMin').value = min;
+    document.getElementById('priceSliderMax').value = max;
+    document.getElementById('priceMinLabel').textContent = '$' + min.toLocaleString();
+    document.getElementById('priceMaxLabel').textContent = '$' + max.toLocaleString();
+    updateRangeTrack();
+    doFilter();
+}
+function updateRangeTrack() {
+    const min = +document.getElementById('priceSliderMin').value;
+    const max = +document.getElementById('priceSliderMax').value;
+    const track = document.getElementById('rangeTrack');
+    track.style.setProperty('--range-left', (min/4000*100) + '%');
+    track.style.setProperty('--range-right', (100 - max/4000*100) + '%');
+}
+function clearAllFilters() {
+    document.querySelectorAll('#neighborhoodList input').forEach(c => c.checked = false);
+    ['priceMin','priceMax'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('priceSliderMin').value = 0;
+    document.getElementById('priceSliderMax').value = 4000;
+    document.getElementById('priceMinLabel').textContent = '$0';
+    document.getElementById('priceMaxLabel').textContent = '$4,000';
+    document.getElementById('moveInMonth').value = '';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('filterRedEye').checked = false;
+    document.getElementById('filterNoBroker').checked = false;
+    document.getElementById('filterKitchen').checked = false;
+    document.getElementById('filterLaundry').checked = false;
+    state.beds = '';
+    document.querySelectorAll('.pill-btn').forEach(p => p.classList.remove('active'));
+    document.querySelector('.pill-btn[data-beds=""]').classList.add('active');
+    state.type = 'all';
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    document.querySelector('.chip[data-type="all"]').classList.add('active');
+    updateRangeTrack();
+    doFilter();
+}
+
+// ── Util ──────────────────────────────────────────────────────────────────────
+function escHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.getElementById('detailModal').addEventListener('click', e => { if (e.target === document.getElementById('detailModal')) closeDetailModal(); });
+document.getElementById('postModal').addEventListener('click',   e => { if (e.target === document.getElementById('postModal'))   closePostModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDetailModal(); closePostModal(); } });
+
+// Init
+updateRangeTrack();
+doFilter();
+</script>
+</body>
+</html>
